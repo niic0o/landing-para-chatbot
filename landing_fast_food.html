@@ -303,11 +303,10 @@
          CONFIGURACIÓN DEL WEBHOOK DE N8N
         ========================================================
         Reemplaza la URL de abajo por la URL de producción de tu 
-        nodo de Webhook en n8n que recibe los mensajes del chat.
-        Debe ser un webhook configurado para recibir métodos POST.
+        nodo de Webhook o Chat Trigger en n8n.
         ========================================================
         */
-        const N8N_WEBHOOK_URL = 'https://TU-DOMINIO-N8N.com/webhook/chat-endpoint';
+        const N8N_WEBHOOK_URL = 'https://ssitechnologies.app.n8n.cloud/webhook/bfe12542-3975-42a2-9d17-feac109c7cbf/chat';
         
         // Elementos del DOM
         const chatToggleBtn = document.getElementById('chat-toggle');
@@ -319,12 +318,18 @@
         
         let chatIsOpen = false;
 
+        // Generar y guardar un SessionID único para mantener el historial del chat en n8n
+        let chatSessionId = sessionStorage.getItem('firegrill_session');
+        if (!chatSessionId) {
+            chatSessionId = crypto.randomUUID ? crypto.randomUUID() : 'session-' + Date.now();
+            sessionStorage.setItem('firegrill_session', chatSessionId);
+        }
+
         // Función para alternar la visibilidad del chat
         function toggleChat() {
             chatIsOpen = !chatIsOpen;
             if (chatIsOpen) {
                 chatWindow.classList.remove('hidden');
-                // Pequeño delay para la animación
                 setTimeout(() => {
                     chatWindow.classList.remove('scale-95', 'opacity-0');
                     chatWindow.classList.add('scale-100', 'opacity-100');
@@ -335,7 +340,7 @@
                 chatWindow.classList.add('scale-95', 'opacity-0');
                 setTimeout(() => {
                     chatWindow.classList.add('hidden');
-                }, 300); // Esperar a que termine la transición
+                }, 300); 
             }
         }
 
@@ -343,7 +348,7 @@
         chatToggleBtn.addEventListener('click', toggleChat);
         closeChatBtn.addEventListener('click', toggleChat);
 
-        // Función global para ser llamada desde los botones "Ordenar" del menú
+        // Función global para los botones "Ordenar" del menú
         window.openChat = function(initialMessage) {
             if (!chatIsOpen) toggleChat();
             if (initialMessage) {
@@ -352,7 +357,7 @@
             }
         };
 
-        // Función para agregar mensaje a la interfaz
+        // Función para agregar mensaje visual a la interfaz
         function appendMessage(text, sender = 'user') {
             const msgDiv = document.createElement('div');
             msgDiv.className = `flex gap-2 fade-in ${sender === 'user' ? 'flex-row-reverse' : ''}`;
@@ -368,13 +373,16 @@
                 ? 'bg-brand-red text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-sm max-w-[85%]' 
                 : 'bg-zinc-800 text-gray-200 p-3 rounded-2xl rounded-tl-none border border-zinc-700 shadow-sm text-sm max-w-[85%]';
 
+            // Formatear markdown básico (opcional) a saltos de línea para el bot
+            const formattedText = text.replace(/\n/g, '<br>');
+
             msgDiv.innerHTML = `
                 ${avatar}
-                <div class="${bubbleClass}">${text}</div>
+                <div class="${bubbleClass}">${formattedText}</div>
             `;
             
             chatMessages.appendChild(msgDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll
+            chatMessages.scrollTop = chatMessages.scrollHeight; 
         }
 
         // Intercepción del formulario (Envío a n8n)
@@ -383,12 +391,12 @@
             const message = chatInput.value.trim();
             if (!message) return;
 
-            // 1. Mostrar el mensaje del usuario
+            // Mostrar el mensaje del usuario
             appendMessage(message, 'user');
             chatInput.value = '';
-            chatInput.disabled = true; // Prevenir múltiples envíos rápidos
+            chatInput.disabled = true;
 
-            // 2. Mostrar indicador de "escribiendo..."
+            // Mostrar indicador de "escribiendo..."
             const typingId = 'typing-' + Date.now();
             const typingDiv = document.createElement('div');
             typingDiv.id = typingId;
@@ -404,42 +412,52 @@
             chatMessages.appendChild(typingDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // 3. Enviar a n8n mediante Fetch API
             try {
-                // NOTA: Para que esto funcione sin errores CORS, el webhook de n8n 
-                // debe tener habilitada la opción "Respond to CORS" en sus configuraciones.
-                
+                // Validación para evitar el error 'Failed to fetch' si sigues usando la URL de ejemplo
+                if (N8N_WEBHOOK_URL.includes('TU-DOMINIO-N8N.com')) {
+                    throw new Error("URL_DE_PRUEBA");
+                }
+
+                // Adaptación exacta al estándar de la librería @n8n/chat
                 const response = await fetch(N8N_WEBHOOK_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                        sessionId: "user-" + Math.floor(Math.random() * 1000000), // ID básico de sesión
-                        message: message,
-                        timestamp: new Date().toISOString()
+                        action: "sendMessage",       // Requerido por el nodo de Chat Trigger
+                        sessionId: chatSessionId,    // Permite que la IA mantenga la memoria de la charla
+                        chatInput: message           // El mensaje exacto del usuario
                     })
                 });
 
-                // Remover el indicador de "escribiendo"
-                document.getElementById(typingId).remove();
+                document.getElementById(typingId)?.remove();
 
                 if (response.ok) {
-                    // Si n8n devuelve texto directamente o un JSON. (Ajusta según tu output del nodo)
                     const data = await response.json(); 
-                    // Supongamos que tu nodo n8n responde un JSON: { "reply": "Su orden está lista..." }
-                    const botReply = data.reply || data.output || "Mensaje recibido correctamente. (Ajusta la respuesta en n8n)";
+                    
+                    // El Chat Trigger de n8n suele devolver la respuesta en el atributo "output"
+                    const botReply = data.output || data.text || (Array.isArray(data) && data[0]?.output) || "¡Listo! Procesé tu solicitud.";
+                    
                     appendMessage(botReply, 'bot');
                 } else {
-                    throw new Error("n8n response not ok");
+                    throw new Error("Respuesta de n8n con error: " + response.status);
                 }
 
             } catch (error) {
-                // Error de red o CORS
-                document.getElementById(typingId).remove();
-                console.error("Error contactando a n8n:", error);
+                // Eliminamos el indicador de 'escribiendo'
+                document.getElementById(typingId)?.remove();
                 
-                // Respuesta de respaldo predeterminada simulando el bot
+                // Si es por la URL de prueba, no mostramos un error de consola feo, sino un aviso amigable
+                if (error.message === "URL_DE_PRUEBA") {
+                    console.log("Simulación activa: Recuerda cambiar N8N_WEBHOOK_URL por tu enlace real para conectar con n8n.");
+                } else {
+                    // Otros errores (como CORS o red real)
+                    console.error("Error contactando a n8n:", error);
+                }
+                
+                // Fallback local simulado
                 let cleanItem = message.replace(/Quiero( pedir)? (un |una |unas )?/gi, '');
                 appendMessage(`Excelente elección: ${cleanItem}. ¿Quieres elegir algo más o quieres dejarme tu nombre, apellido y dirección para que te lo enviemos?`, 'bot');
             } finally {
