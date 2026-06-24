@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FireGrill A la parrilla | Comida Rápida y Bebidas</title>
+    
+    <!-- Tailwind CSS (via CDN para uso directo) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#09090b',
+                            red: '#dc2626',
+                            redHover: '#b91c1c',
+                            yellow: '#facc15'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar for Chat */
+        .chat-scroll::-webkit-scrollbar { width: 6px; }
+        .chat-scroll::-webkit-scrollbar-track { background: #18181b; }
+        .chat-scroll::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
+        .chat-scroll::-webkit-scrollbar-thumb:hover { background: #52525b; }
+        
+        /* Fade In Animation */
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-zinc-950 text-gray-200 font-sans antialiased relative">
+
+    <!-- Navbar -->
+    <header class="fixed w-full top-0 z-40 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-fire-flame-curved text-brand-red text-2xl"></i>
+                <div class="flex flex-col">
+                    <h1 class="text-2xl font-bold text-white tracking-tight leading-none">Fire<span class="text-brand-red">Grill</span></h1>
+                    <span class="text-[10px] text-brand-yellow font-bold uppercase tracking-widest mt-1">A la parrilla</span>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-8 font-medium">
+                <a href="#inicio" class="hover:text-brand-yellow transition-colors duration-300 text-white">Inicio</a>
+                <a href="#menu" class="hover:text-brand-yellow transition-colors duration-300">Menú</a>
+                <a href="#bebidas" class="hover:text-brand-yellow transition-colors duration-300">Bebidas</a>
+            </nav>
+            <div>
+                <a href="https://wa.me/5493794013748" target="_blank" class="bg-brand-red hover:bg-brand-redHover text-white px-5 py-2.5 rounded-full font-semibold transition-all duration-300 shadow-lg shadow-red-500/30 flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg text-white"></i> Pedir Directo
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+        <div class="flex-1 space-y-6 text-center md:text-left z-10">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-zinc-900 border border-brand-red/30 text-brand-yellow font-semibold text-sm mb-2">
+                <i class="fa-solid fa-bolt mr-2"></i>Preparación en 15 minutos
+            </div>
+            <h2 class="text-5xl md:text-7xl font-extrabold text-white leading-tight">
+                El verdadero sabor <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-red-400">a la parrilla.</span>
+            </h2>
+            <p class="text-lg text-gray-400 max-w-xl mx-auto md:mx-0">
+                Las mejores hamburguesas, sándwiches de milanesa y bebidas bien heladas. Pide ahora a través de nuestro chatbot automatizado o directamente por WhatsApp.
+            </p>
+            <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <a href="#menu" class="bg-brand-red hover:bg-brand-redHover text-white px-8 py-3.5 rounded-full font-bold transition-all duration-300 shadow-lg shadow-red-500/20 text-center text-lg">
+                    Ver Menú
+                </a>
+            </div>
+        </div>
+        <div class="flex-1 relative w-full max-w-md mx-auto md:max-w-full">
+            <div class="absolute inset-0 bg-gradient-to-tr from-brand-red/20 to-transparent rounded-full blur-3xl"></div>
+            <!-- Imagen ilustrativa -->
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" alt="Hamburguesa FireGrill" class="relative z-10 w-full h-auto object-cover rounded-2xl shadow-2xl border border-zinc-800 rotate-2 hover:rotate-0 transition-transform duration-500">
+        </div>
+    </section>
+
+    <!-- Separator -->
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent"></div>
+
+    <!-- Menú Principal (Comidas) -->
+    <section id="menu" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h3 class="text-4xl font-bold text-white mb-4">Nuestro Menú</h3>
+            <p class="text-gray-400">Seleccionamos los mejores ingredientes para ti.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Item 1: Burger Clásica -->
+            <article class="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors duration-300 group">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80" alt="Hamburguesa Clásica" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-xl font-bold text-white">Classic Burger</h4>
+                        <span class="text-brand-yellow font-bold text-xl">$7500 ARS</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6 line-clamp-2">Doble medallón de carne, queso cheddar, lechuga, tomate y nuestra salsa secreta FireGrill.</p>
+                    <button onclick="openChat('Quiero pedir una Classic Burger ($7500 ARS)')" class="w-full bg-zinc-800 hover:bg-brand-red text-white py-2.5 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Ordenar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 2: Sanguche de Mila Carne -->
+            <article class="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors duration-300 group">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80" alt="Sándwich de Milanesa de Carne" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-xl font-bold text-white">Sándwich Mila Carne</h4>
+                        <span class="text-brand-yellow font-bold text-xl">$9000 ARS</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6 line-clamp-2">Auténtica milanesa de ternera frita, jamón, queso, huevo, lechuga y tomate en pan francés crujiente.</p>
+                    <button onclick="openChat('Quiero pedir un Sándwich Mila Carne ($9000 ARS)')" class="w-full bg-zinc-800 hover:bg-brand-red text-white py-2.5 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Ordenar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 3: Sanguche de Mila Pollo -->
+            <article class="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors duration-300 group">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1619881589316-56c7f9e6b587?auto=format&fit=crop&w=600&q=80" alt="Sándwich de Milanesa de Pollo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-xl font-bold text-white">Sándwich Mila Pollo</h4>
+                        <span class="text-brand-yellow font-bold text-xl">$8250 ARS</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6 line-clamp-2">Pechuga de pollo empanizada y extra crujiente, mayonesa, lechuga, tomate y queso cheddar fundido.</p>
+                    <button onclick="openChat('Quiero pedir un Sándwich Mila Pollo ($8250 ARS)')" class="w-full bg-zinc-800 hover:bg-brand-red text-white py-2.5 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Ordenar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 4: Papas Fritas -->
+            <article class="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors duration-300 group">
+                <div class="h-48 overflow-hidden relative">
+                    <div class="absolute top-3 left-3 bg-brand-yellow text-zinc-900 text-xs font-bold px-2 py-1 rounded uppercase">Ideal para acompañar</div>
+                    <img src="https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80" alt="Papas Fritas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-xl font-bold text-white">Papas Fritas XL</h4>
+                        <span class="text-brand-yellow font-bold text-xl">$4500 ARS</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6 line-clamp-2">Porción gigante de papas fritas rústicas, crujientes por fuera y tiernas por dentro.</p>
+                    <button onclick="openChat('Quiero pedir unas Papas Fritas XL ($4500 ARS)')" class="w-full bg-zinc-800 hover:bg-brand-red text-white py-2.5 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Ordenar
+                    </button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Bebidas -->
+    <section id="bebidas" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-zinc-900/50 rounded-3xl mb-20 border border-zinc-800/50">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl font-bold text-white mb-2"><i class="fa-solid fa-snowflake text-cyan-500 mr-2"></i> Bebidas Heladas</h3>
+            <p class="text-gray-400">El complemento perfecto para tu comida.</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <!-- Coca -->
+            <div class="bg-zinc-950 p-4 rounded-xl border border-zinc-800 text-center hover:border-brand-red/50 transition-colors cursor-pointer" onclick="openChat('Quiero una Coca-Cola ($2250 ARS)')">
+                <i class="fa-solid fa-bottle-droplet text-4xl text-gray-300 mb-3 block"></i>
+                <h5 class="font-bold text-white">Coca-Cola</h5>
+                <p class="text-xs text-gray-400 mb-2">500ml</p>
+                <span class="text-brand-yellow font-semibold block">$2250 ARS</span>
+            </div>
+            <!-- Sprite -->
+            <div class="bg-zinc-950 p-4 rounded-xl border border-zinc-800 text-center hover:border-brand-red/50 transition-colors cursor-pointer" onclick="openChat('Quiero una Sprite ($2250 ARS)')">
+                <i class="fa-solid fa-bottle-droplet text-4xl text-green-400 mb-3 block"></i>
+                <h5 class="font-bold text-white">Sprite</h5>
+                <p class="text-xs text-gray-400 mb-2">500ml</p>
+                <span class="text-brand-yellow font-semibold block">$2250 ARS</span>
+            </div>
+            <!-- Cerveza -->
+            <div class="bg-zinc-950 p-4 rounded-xl border border-zinc-800 text-center hover:border-brand-yellow/50 transition-colors cursor-pointer" onclick="openChat('Quiero una Cerveza Lata ($3750 ARS)')">
+                <i class="fa-solid fa-beer-mug-empty text-4xl text-brand-yellow mb-3 block"></i>
+                <h5 class="font-bold text-white">Cerveza Lata</h5>
+                <p class="text-xs text-gray-400 mb-2">473ml Helada</p>
+                <span class="text-brand-yellow font-semibold block">$3750 ARS</span>
+            </div>
+            <!-- Fernet -->
+            <div class="bg-zinc-950 p-4 rounded-xl border border-zinc-800 text-center hover:border-brand-red/50 transition-colors cursor-pointer" onclick="openChat('Quiero un Fernet Viajero ($6000 ARS)')">
+                <i class="fa-solid fa-martini-glass-citrus text-4xl text-purple-400 mb-3 block"></i>
+                <h5 class="font-bold text-white">Fernet c/ Coca</h5>
+                <p class="text-xs text-gray-400 mb-2">Vaso Grande (Viajero)</p>
+                <span class="text-brand-yellow font-semibold block">$6000 ARS</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex justify-center items-center gap-2 mb-6">
+                <i class="fa-solid fa-fire-flame-curved text-brand-red text-2xl"></i>
+                <div class="flex flex-col text-left">
+                    <h2 class="text-2xl font-bold text-white tracking-tight leading-none">Fire<span class="text-brand-red">Grill</span></h2>
+                    <span class="text-[10px] text-brand-yellow font-bold uppercase tracking-widest mt-1">A la parrilla</span>
+                </div>
+            </div>
+            <p class="text-gray-500 mb-6">Comida rápida con calidad premium. Precios expresados en ARS.</p>
+            
+            <a href="https://wa.me/5493794013748" target="_blank" class="inline-flex items-center justify-center gap-2 text-[#25D366] hover:text-white border border-[#25D366] hover:bg-[#25D366] px-6 py-2 rounded-full transition-all duration-300">
+                <i class="fa-brands fa-whatsapp text-xl"></i> +54 9 3794 01-3748
+            </a>
+            
+            <p class="text-zinc-700 text-sm mt-12">&copy; 2026 FireGrill. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- WIDGET FLOTANTE CHATBOT (n8n Integration Ready) -->
+    <!-- Botón Flotante -->
+    <button id="chat-toggle" class="fixed bottom-6 right-6 w-16 h-16 bg-[#25D366] hover:bg-green-500 text-white rounded-full shadow-[0_0_20px_rgba(37,211,102,0.4)] flex items-center justify-center text-3xl z-50 transition-transform duration-300 hover:scale-110 active:scale-95">
+        <i class="fa-brands fa-whatsapp"></i>
+        <!-- Ping indicator -->
+        <span class="absolute top-0 right-0 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-brand-red border-2 border-zinc-950"></span>
+        </span>
+    </button>
+
+    <!-- Ventana del Chat -->
+    <div id="chat-window" class="fixed bottom-28 right-6 w-[350px] h-[500px] bg-zinc-900 border border-zinc-700 rounded-2xl shadow-2xl z-50 flex flex-col hidden transform origin-bottom-right transition-all duration-300 scale-95 opacity-0">
+        
+        <!-- Chat Header -->
+        <div class="bg-zinc-800 p-4 rounded-t-2xl border-b border-zinc-700 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <div class="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center text-white font-bold">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-zinc-800"></div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-white text-sm">CocineroBot</h3>
+                    <p class="text-xs text-green-400">En línea (n8n bot)</p>
+                </div>
+            </div>
+            <button id="close-chat" class="text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Chat Messages Area -->
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto chat-scroll flex flex-col gap-3 bg-zinc-950">
+            <!-- Mensaje de bienvenida del bot -->
+            <div class="flex gap-2 fade-in">
+                <div class="w-8 h-8 rounded-full bg-brand-red flex-shrink-0 flex items-center justify-center text-white text-xs mt-1">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="bg-zinc-800 text-sm text-gray-200 p-3 rounded-2xl rounded-tl-none border border-zinc-700 max-w-[85%] shadow-sm">
+                    ¡Hola! Soy CocineroBot 👨‍🍳🔥<br><br>
+                    ¿Qué vas a pedir hoy? Puedes elegir del menú o escribirme.
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input Area -->
+        <div class="p-3 bg-zinc-900 rounded-b-2xl border-t border-zinc-800">
+            <form id="chat-form" class="flex items-center gap-2">
+                <input type="text" id="chat-input" placeholder="Escribe tu pedido aquí..." autocomplete="off" class="flex-1 bg-zinc-950 border border-zinc-700 text-white text-sm rounded-full px-4 py-2.5 focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all">
+                <button type="submit" class="w-10 h-10 bg-brand-red hover:bg-brand-redHover text-white rounded-full flex items-center justify-center transition-colors flex-shrink-0">
+                    <i class="fa-solid fa-paper-plane text-sm -ml-0.5 mt-0.5"></i>
+                </button>
+            </form>
+            <p class="text-[10px] text-center text-zinc-500 mt-2">Powered by n8n Automation</p>
+        </div>
+    </div>
+
+    <!-- Script de lógica e integración con n8n -->
+    <script>
+        /* ========================================================
+         CONFIGURACIÓN DEL WEBHOOK DE N8N
+        ========================================================
+        Reemplaza la URL de abajo por la URL de producción de tu 
+        nodo de Webhook en n8n que recibe los mensajes del chat.
+        Debe ser un webhook configurado para recibir métodos POST.
+        ========================================================
+        */
+        const N8N_WEBHOOK_URL = 'https://TU-DOMINIO-N8N.com/webhook/chat-endpoint';
+        
+        // Elementos del DOM
+        const chatToggleBtn = document.getElementById('chat-toggle');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChatBtn = document.getElementById('close-chat');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+        
+        let chatIsOpen = false;
+
+        // Función para alternar la visibilidad del chat
+        function toggleChat() {
+            chatIsOpen = !chatIsOpen;
+            if (chatIsOpen) {
+                chatWindow.classList.remove('hidden');
+                // Pequeño delay para la animación
+                setTimeout(() => {
+                    chatWindow.classList.remove('scale-95', 'opacity-0');
+                    chatWindow.classList.add('scale-100', 'opacity-100');
+                    chatInput.focus();
+                }, 10);
+            } else {
+                chatWindow.classList.remove('scale-100', 'opacity-100');
+                chatWindow.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    chatWindow.classList.add('hidden');
+                }, 300); // Esperar a que termine la transición
+            }
+        }
+
+        // Event Listeners para abrir/cerrar
+        chatToggleBtn.addEventListener('click', toggleChat);
+        closeChatBtn.addEventListener('click', toggleChat);
+
+        // Función global para ser llamada desde los botones "Ordenar" del menú
+        window.openChat = function(initialMessage) {
+            if (!chatIsOpen) toggleChat();
+            if (initialMessage) {
+                chatInput.value = initialMessage;
+                chatForm.dispatchEvent(new Event('submit'));
+            }
+        };
+
+        // Función para agregar mensaje a la interfaz
+        function appendMessage(text, sender = 'user') {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `flex gap-2 fade-in ${sender === 'user' ? 'flex-row-reverse' : ''}`;
+            
+            const isUser = sender === 'user';
+            
+            let avatar = '';
+            if (!isUser) {
+                avatar = `<div class="w-8 h-8 rounded-full bg-brand-red flex-shrink-0 flex items-center justify-center text-white text-xs mt-1"><i class="fa-solid fa-robot"></i></div>`;
+            }
+
+            const bubbleClass = isUser 
+                ? 'bg-brand-red text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-sm max-w-[85%]' 
+                : 'bg-zinc-800 text-gray-200 p-3 rounded-2xl rounded-tl-none border border-zinc-700 shadow-sm text-sm max-w-[85%]';
+
+            msgDiv.innerHTML = `
+                ${avatar}
+                <div class="${bubbleClass}">${text}</div>
+            `;
+            
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll
+        }
+
+        // Intercepción del formulario (Envío a n8n)
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // 1. Mostrar el mensaje del usuario
+            appendMessage(message, 'user');
+            chatInput.value = '';
+            chatInput.disabled = true; // Prevenir múltiples envíos rápidos
+
+            // 2. Mostrar indicador de "escribiendo..."
+            const typingId = 'typing-' + Date.now();
+            const typingDiv = document.createElement('div');
+            typingDiv.id = typingId;
+            typingDiv.className = 'flex gap-2 fade-in';
+            typingDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-brand-red flex-shrink-0 flex items-center justify-center text-white text-xs mt-1"><i class="fa-solid fa-robot"></i></div>
+                <div class="bg-zinc-800 p-4 rounded-2xl rounded-tl-none border border-zinc-700 shadow-sm flex gap-1 items-center">
+                    <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
+                    <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                    <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                </div>
+            `;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // 3. Enviar a n8n mediante Fetch API
+            try {
+                // NOTA: Para que esto funcione sin errores CORS, el webhook de n8n 
+                // debe tener habilitada la opción "Respond to CORS" en sus configuraciones.
+                
+                const response = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        sessionId: "user-" + Math.floor(Math.random() * 1000000), // ID básico de sesión
+                        message: message,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+
+                // Remover el indicador de "escribiendo"
+                document.getElementById(typingId).remove();
+
+                if (response.ok) {
+                    // Si n8n devuelve texto directamente o un JSON. (Ajusta según tu output del nodo)
+                    const data = await response.json(); 
+                    // Supongamos que tu nodo n8n responde un JSON: { "reply": "Su orden está lista..." }
+                    const botReply = data.reply || data.output || "Mensaje recibido correctamente. (Ajusta la respuesta en n8n)";
+                    appendMessage(botReply, 'bot');
+                } else {
+                    throw new Error("n8n response not ok");
+                }
+
+            } catch (error) {
+                // Error de red o CORS
+                document.getElementById(typingId).remove();
+                console.error("Error contactando a n8n:", error);
+                
+                // Respuesta de respaldo predeterminada simulando el bot
+                let cleanItem = message.replace(/Quiero( pedir)? (un |una |unas )?/gi, '');
+                appendMessage(`Excelente elección: ${cleanItem}. ¿Quieres elegir algo más o quieres dejarme tu nombre, apellido y dirección para que te lo enviemos?`, 'bot');
+            } finally {
+                chatInput.disabled = false;
+                chatInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>
